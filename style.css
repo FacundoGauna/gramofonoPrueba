@@ -1,4 +1,4 @@
-/* General */
+re/* General */
 body {
     display: flex;
     flex-direction: column;
@@ -69,19 +69,12 @@ h2 { font-size: 1.2rem; }
     cursor: grab;
 }
 
-/* Contenedor del texto y rectángulo */
+/* Contenedor del texto */
 .info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
-}
-
-/* Rectángulo debajo del gramófono */
-.info-rect {
-    background: gray;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* 📱 Estilo para móviles (4:3 vertical) */
