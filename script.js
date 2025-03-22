@@ -2,9 +2,21 @@ const needle = document.getElementById("needle");
 const disc = document.getElementById("disc");
 const music = document.getElementById("music");
 
-let isPlaying = false;
+let isPlaying = false; // Empieza en false para evitar problemas en móviles.
 let isDragging = false;
 let rotation = null;
+
+// Desbloquear reproducción en móviles
+document.addEventListener("touchstart", () => {
+    music.play();
+    setTimeout(() => {
+        music.pause();
+        music.currentTime = 0;
+    }, 500);
+
+    // Eliminar el listener después de la primera interacción
+    document.removeEventListener("touchstart", arguments.callee);
+}, { passive: true });
 
 // Ajustar el punto de rotación de la aguja
 needle.style.transformOrigin = "top center";
@@ -13,12 +25,6 @@ needle.style.transformOrigin = "top center";
 function startDrag(e) {
     e.preventDefault();
     isDragging = true;
-
-    // Intentar activar la música en la primera interacción en móviles
-    if (!isPlaying) {
-        isPlaying = true;
-        music.play().catch(error => console.log("Error al reproducir:", error));
-    }
 }
 
 // Función para mover la aguja (solo hacia la izquierda)
@@ -70,14 +76,14 @@ document.addEventListener("touchmove", moveNeedle, { passive: false });
 document.addEventListener("mouseup", stopDrag);
 document.addEventListener("touchend", stopDrag);
 
-// Función para girar el disco
+// Función para girar el disco (sin impulsos)
 function rotateDisc() {
     let deg = 0;
     function animate() {
         if (isPlaying) {
-            deg += 1; // Incrementar el ángulo de rotación
+            deg += 1; // Incrementar el ángulo de rotación de forma constante
             disc.style.transform = `rotate(${deg}deg)`; // Girar el disco
-            rotation = requestAnimationFrame(animate);
+            rotation = requestAnimationFrame(animate); // Solicitar el siguiente frame para continuar la animación
         }
     }
     animate();
