@@ -69,14 +69,6 @@ h2 { font-size: 1.2rem; }
     cursor: grab;
 }
 
-/* Contenedor del texto */
-.info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2px;
-}
-
 /* 📱 Estilo para móviles (4:3 vertical) */
 @media (max-width: 600px) {
     .turntable {
