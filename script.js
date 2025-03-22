@@ -14,7 +14,7 @@ function startDrag(e) {
     e.preventDefault();
     isDragging = true;
 
-    // 🔥 Intentar activar la música en la primera interacción en móviles
+    // Intentar activar la música en la primera interacción en móviles
     if (!isPlaying) {
         isPlaying = true;
         music.play().catch(error => console.log("Error al reproducir:", error));
