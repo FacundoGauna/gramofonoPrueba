@@ -2,8 +2,8 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Asegura que el contenido está centrado horizontalmente */
+    justify-content: center; /* Asegura que el contenido está centrado verticalmente */
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@ body {
 /* Títulos con efecto de color */
 h1, h2 {
     font-weight: bold;
-    background: transparent);
+    background: transparent;
     -webkit-background-clip: text;
     -webkit-text-fill-color: black;
 }
@@ -31,24 +31,26 @@ h2 { font-size: 1.2rem; }
     background: gray;
     background-image: url("assets/vinilo-hardware.jpg");
     background-size: cover;
-    border-radius: 10px;
+    border-radius: 0px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center;  /* Centra el contenido dentro del turntable */
+    justify-content: center;  /* Centra el contenido dentro del turntable */
+    margin: 0 auto; /* Asegura que el turntable esté centrado en la pantalla */
 }
 
 /* Disco de vinilo */
 .disc {
     position: absolute;
-    width: 60%;
-    height: 60%;
-    max-width: 200px;
-    max-height: 200px;
+    width: 70%; /* Aumentado para que ocupe más espacio */
+    height: 70%; /* Aumentado para que ocupe más espacio */
+    max-width: 250px;
+    max-height: 250px;
     background: black;
     background-image: url("assets/vinilo-maybe.png");
     background-size: cover;
     border-radius: 50%;
-    transition: transform 0.5s;
+    transition: transform 0.1s;
+    left: -10%; /* Centrado horizontalmente */
 }
 
 /* Aguja del gramófono */
@@ -96,4 +98,3 @@ h2 { font-size: 1.2rem; }
     h1 { font-size: 2rem; }
     h2 { font-size: 1rem; }
 }
-
