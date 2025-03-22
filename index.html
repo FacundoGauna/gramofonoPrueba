@@ -13,12 +13,18 @@
             padding: 0;
             font-family: Arial, sans-serif;
             text-align: center;
-            overflow: hidden; /* Previene que se deslice la pantalla por defecto */
+            height: 100vh;
+            overflow: hidden; /* Evitar desplazamiento por defecto */
         }
 
         h1 {
             font-size: 2.5rem;
             color: #fff;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: white;
         }
 
         /* Contenedor principal de la pantalla */
@@ -26,9 +32,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start;
             position: relative;
+            height: 100%;
         }
 
         /* Estilos del gramófono */
@@ -43,6 +49,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: 20px;
         }
 
         .disc {
@@ -68,10 +75,6 @@
             cursor: grab;
         }
 
-        h3 {
-            color: white;
-        }
-
         /* Nuevo rectángulo y texto debajo del gramófono */
         .info-container {
             display: none;
@@ -95,10 +98,11 @@
             color: black;
         }
 
-        /* Para permitir desplazarse */
-        .scrollable {
-            overflow-y: scroll;
-            max-height: 100vh; /* Restrict the scrollable area to the screen height */
+        /* Área desplazable debajo del gramófono */
+        .scrollable-content {
+            display: none;
+            overflow-y: auto;
+            height: calc(100vh - 350px); /* El área de desplazamiento será el espacio debajo del gramófono */
             padding: 20px;
         }
     </style>
@@ -106,9 +110,6 @@
 <body>
 
     <div class="container" id="container">
-        <!-- Botón para iniciar el audio en móviles -->
-        <button id="startButton">Empezar</button>
-
         <h1>Gramófono Interactivo</h1>
 
         <div class="turntable">
@@ -120,42 +121,19 @@
 
         <audio id="music" src="audio/audio.mp3"></audio>
 
-        <!-- Nuevo rectángulo y texto debajo del gramófono -->
-        <div class="scrollable">
+        <!-- Contenedor de la información -->
+        <div class="scrollable-content" id="scrollableContent">
             <div class="info-container" id="infoContainer">
                 <div class="info-rect"></div>
                 <h2>Gramófono de Bolsillo "Colibrí"</h2>
                 <p>Bélgica, años 30 <br>
                     Este peculiar gramófono mide 9 x 12 x 9 cm.<br>
-                    Pese a su pequeño tamaño
+                    Pese a su pequeño tamaño, tiene un sonido excepcional.
                 </p>
             </div>
         </div>
     </div>
 
-    <script>
-        const startButton = document.getElementById("startButton");
-        const music = document.getElementById("music");
-        const container = document.getElementById("container");
-        const infoContainer = document.getElementById("infoContainer");
-
-        startButton.addEventListener("click", () => {
-            music.play();
-            setTimeout(() => {
-                music.pause();
-                music.currentTime = 0;
-            }, 500);
-
-            // Ocultar el botón después de la interacción
-            startButton.style.display = "none";
-
-            // Mostrar la información debajo del gramófono
-            infoContainer.style.display = "block";
-
-            // Permitir desplazamiento de la pantalla
-            container.style.overflow = "auto";
-        });
-    </script>
 
 </body>
 </html>
