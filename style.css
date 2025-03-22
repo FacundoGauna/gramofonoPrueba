@@ -80,8 +80,8 @@ h2 { font-size: 1.2rem; }
 /* 📱 Estilo para móviles (4:3 vertical) */
 @media (max-width: 600px) {
     .turntable {
-        width: 80vw;
-        height: 80vw;
+        width: 60vw;
+        height: 60vw;
     }
 
     .disc {
