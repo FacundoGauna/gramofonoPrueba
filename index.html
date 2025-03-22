@@ -6,32 +6,156 @@
     <meta http-equiv="Content-Style-Type" content="text/css">
     <link rel="stylesheet" href="style.css">
     <title>Gramófono</title>   
+    <style>
+        /* General */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden; /* Previene que se deslice la pantalla por defecto */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        /* Contenedor principal de la pantalla */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Estilos del gramófono */
+        .turntable {
+            position: relative;
+            width: 60vw;
+            max-width: 300px;
+            height: 60vw;
+            max-height: 300px;
+            background: gray;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .disc {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            max-width: 200px;
+            max-height: 200px;
+            background: black;
+            background-image: url("assets/vinilo-maybe.png");
+            background-size: cover;
+            border-radius: 50%;
+        }
+
+        .needle {
+            position: absolute;
+            top: 20%;
+            left: 90%;
+            width: 3%;
+            height: 50%;
+            background: brown;
+            transform-origin: top;
+            cursor: grab;
+        }
+
+        h3 {
+            color: white;
+        }
+
+        /* Nuevo rectángulo y texto debajo del gramófono */
+        .info-container {
+            display: none;
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .info-rect {
+            width: 100%;
+            height: 100px;
+            background: #444;
+            border-radius: 5px;
+        }
+
+        .info-container h2,
+        .info-container p {
+            color: black;
+        }
+
+        /* Para permitir desplazarse */
+        .scrollable {
+            overflow-y: scroll;
+            max-height: 100vh; /* Restrict the scrollable area to the screen height */
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Gramófono Interactivo</h1>
+    <div class="container" id="container">
+        <!-- Botón para iniciar el audio en móviles -->
+        <button id="startButton">Empezar</button>
 
-<div class="turntable">
-    <div class="disc" id="disc"></div>
-    <div class="needle" id="needle"></div>
-</div>
+        <h1>Gramófono Interactivo</h1>
 
-<h3>Mueve la aguja para<br>escuchar la música</h3>
+        <div class="turntable">
+            <div class="disc" id="disc"></div>
+            <div class="needle" id="needle"></div>
+        </div>
 
-<audio id="music" src="audio/audio.mp3"></audio>
+        <h3>Mueve la aguja para<br>escuchar la música</h3>
 
-<!-- Nuevo rectángulo y texto agregado -->
-<div class="info-container">
-    <div class="info-rect"></div>
-    <h2>Gramófono de Bolsillo "Colibrí"</h2>
-    <p>Bélgica, años 30 <br>
-        Este peculiar gramófono mide 9 x 12 x 9 cm.<br>
-        Pese a su pequeño tamaño
+        <audio id="music" src="audio/audio.mp3"></audio>
 
-    </p>
-</div>
+        <!-- Nuevo rectángulo y texto debajo del gramófono -->
+        <div class="scrollable">
+            <div class="info-container" id="infoContainer">
+                <div class="info-rect"></div>
+                <h2>Gramófono de Bolsillo "Colibrí"</h2>
+                <p>Bélgica, años 30 <br>
+                    Este peculiar gramófono mide 9 x 12 x 9 cm.<br>
+                    Pese a su pequeño tamaño
+                </p>
+            </div>
+        </div>
+    </div>
 
-<script src="script.js"></script>
+    <script>
+        const startButton = document.getElementById("startButton");
+        const music = document.getElementById("music");
+        const container = document.getElementById("container");
+        const infoContainer = document.getElementById("infoContainer");
+
+        startButton.addEventListener("click", () => {
+            music.play();
+            setTimeout(() => {
+                music.pause();
+                music.currentTime = 0;
+            }, 500);
+
+            // Ocultar el botón después de la interacción
+            startButton.style.display = "none";
+
+            // Mostrar la información debajo del gramófono
+            infoContainer.style.display = "block";
+
+            // Permitir desplazamiento de la pantalla
+            container.style.overflow = "auto";
+        });
+    </script>
 
 </body>
 </html>
