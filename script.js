@@ -2,8 +2,7 @@ const needle = document.getElementById("needle");
 const disc = document.getElementById("disc");
 const music = document.getElementById("music");
 
-
-let isPlaying = true; //Para que no falle en el tlf.
+let isPlaying = false;
 let isDragging = false;
 let rotation = null;
 
@@ -14,6 +13,12 @@ needle.style.transformOrigin = "top center";
 function startDrag(e) {
     e.preventDefault();
     isDragging = true;
+
+    // 🔥 Intentar activar la música en la primera interacción en móviles
+    if (!isPlaying) {
+        isPlaying = true;
+        music.play().catch(error => console.log("Error al reproducir:", error));
+    }
 }
 
 // Función para mover la aguja (solo hacia la izquierda)
@@ -28,7 +33,7 @@ function moveNeedle(e) {
 
     // Calcular ángulo basado en la posición del dedo o ratón
     let angle = ((centerX - clientX) / centerX) * 1000; 
-    angle = Math.max(0, Math.min(30, angle)); // Limitar entre 0° y -45° (solo a la izquierda)
+    angle = Math.max(0, Math.min(30, angle)); // Limitar entre 0° y 30° (solo a la izquierda)
 
     // Aplicar la rotación sin afectar la posición de la aguja
     needle.style.transform = `rotate(${angle}deg)`;
@@ -37,8 +42,7 @@ function moveNeedle(e) {
     if (angle >= 15) { 
         if (!isPlaying) {
             isPlaying = true;
-            music.play();
-            music.play();
+            music.play().catch(error => console.log("Error al reproducir:", error));
             rotateDisc();
         }
     } else {
@@ -66,15 +70,14 @@ document.addEventListener("touchmove", moveNeedle, { passive: false });
 document.addEventListener("mouseup", stopDrag);
 document.addEventListener("touchend", stopDrag);
 
-
-// Función para girar el disco (sin impulsos)
+// Función para girar el disco
 function rotateDisc() {
     let deg = 0;
     function animate() {
         if (isPlaying) {
-            deg += 1; // Incrementar el ángulo de rotación de forma constante
+            deg += 1; // Incrementar el ángulo de rotación
             disc.style.transform = `rotate(${deg}deg)`; // Girar el disco
-            rotation = requestAnimationFrame(animate); // Solicitar el siguiente frame para continuar la animación
+            rotation = requestAnimationFrame(animate);
         }
     }
     animate();
