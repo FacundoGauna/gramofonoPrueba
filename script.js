@@ -38,7 +38,7 @@ function moveNeedle(e) {
     let centerX = window.innerWidth / 2;
 
     // Calcular ángulo basado en la posición del dedo o ratón
-    let angle = ((centerX - clientX) / centerX) * 3000; 
+    let angle = ((centerX - clientX) / centerX) * 2000; 
     angle = Math.max(30, Math.min(65, angle)); // Limitar entre 0° y 30° (solo a la izquierda)
 
     // Aplicar la rotación sin afectar la posición de la aguja
