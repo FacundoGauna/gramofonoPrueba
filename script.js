@@ -1,22 +1,30 @@
 const needle = document.getElementById("needle");
 const disc = document.getElementById("disc");
 const music = document.getElementById("music");
+const enableSoundButton = document.getElementById("enableSound");
 
-let isPlaying = false; // Empieza en false para evitar problemas en móviles.
+let isPlaying = false;
 let isDragging = false;
 let rotation = null;
+let audioUnlocked = false;
 
-// Desbloquear reproducción en móviles
-document.addEventListener("touchstart", () => {
-    music.play();
-    setTimeout(() => {
-        music.pause();
-        music.currentTime = 0;
-    }, 500);
+// Crear un AudioContext para desbloquear el audio en móviles
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const musicSource = audioContext.createMediaElementSource(music);
+musicSource.connect(audioContext.destination);
 
-    // Eliminar el listener después de la primera interacción
-    document.removeEventListener("touchstart", arguments.callee);
-}, { passive: true });
+// Botón para desbloquear el audio
+enableSoundButton.addEventListener("click", function () {
+    audioContext.resume().then(() => {
+        music.play().then(() => {
+            music.pause();
+            music.currentTime = 0;
+        }).catch(error => console.log("Error desbloqueando música:", error));
+
+        audioUnlocked = true;
+        enableSoundButton.remove();
+    });
+});
 
 // Ajustar el punto de rotación de la aguja
 needle.style.transformOrigin = "top center";
@@ -24,6 +32,7 @@ needle.style.transformOrigin = "top center";
 // Función para iniciar el arrastre
 function startDrag(e) {
     e.preventDefault();
+    if (!audioUnlocked) return; // Evitar que funcione sin desbloquear audio
     isDragging = true;
 }
 
@@ -31,20 +40,14 @@ function startDrag(e) {
 function moveNeedle(e) {
     if (!isDragging) return;
 
-    // Detectar si es touch o mouse y obtener posición X
     let clientX = e.touches ? e.touches[0].clientX : e.clientX;
-
-    // Obtener el centro de la pantalla
     let centerX = window.innerWidth / 2;
 
-    // Calcular ángulo basado en la posición del dedo o ratón
-    let angle = ((centerX - clientX) / centerX) * 2000; 
-    angle = Math.max(30, Math.min(65, angle)); // Limitar entre 0° y 30° (solo a la izquierda)
+    let angle = ((centerX - clientX) / centerX) * 2000;
+    angle = Math.max(30, Math.min(65, angle)); // Limitar entre 30° y 65°
 
-    // Aplicar la rotación sin afectar la posición de la aguja
     needle.style.transform = `rotate(${angle}deg)`;
 
-    // Activar música cuando la aguja está sobre el vinilo
     if (angle >= 45) { 
         if (!isPlaying) {
             isPlaying = true;
@@ -76,14 +79,14 @@ document.addEventListener("touchmove", moveNeedle, { passive: false });
 document.addEventListener("mouseup", stopDrag);
 document.addEventListener("touchend", stopDrag);
 
-// Función para girar el disco (sin impulsos)
+// Función para girar el disco
 function rotateDisc() {
     let deg = 0;
     function animate() {
         if (isPlaying) {
-            deg += 1; // Incrementar el ángulo de rotación de forma constante
-            disc.style.transform = `rotate(${deg}deg)`; // Girar el disco
-            rotation = requestAnimationFrame(animate); // Solicitar el siguiente frame para continuar la animación
+            deg += 1;
+            disc.style.transform = `rotate(${deg}deg)`;
+            rotation = requestAnimationFrame(animate);
         }
     }
     animate();
