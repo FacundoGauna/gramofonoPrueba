@@ -40,6 +40,12 @@ p {
     white-space: nowrap; /* En una sola línea */
 }
 
+@keyframes blinkColor {
+    0% { background: #ff4444; }
+    50% { background: #ffcc00; } /* Amarillo */
+    100% { background: #ff4444; }
+}
+
 button {
     position: absolute;
     top: 80px;
@@ -52,6 +58,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    animation: blinkColor 1s infinite alternate; /* 🔹 Aplica la animación */
 }
 
 button:hover {
