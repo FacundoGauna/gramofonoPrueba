@@ -144,7 +144,10 @@ body {
     h1 { font-size: 2.3rem; }
     h2 { font-size: 1.2rem; }
     h3 {font-size: 1.1rem;}
-    p { font-size: 1.1rem; } /* Aún más pequeño en móviles */
+    p { font-size: 1.1rem; 
+        left-margin: 10%; 
+        right-margin: 10%;
+      } /* Aún más pequeño en móviles */
 }
 
 /* Estilo para dispositivos en modo horizontal */
@@ -159,7 +162,9 @@ body {
         margin-bottom: 20px;
     }
     p {
-        max-height: 80%
+        max-width: 70%;
+        left-margin: 10%; 
+        right-margin: 10%;
     }
 
     .turntable {
