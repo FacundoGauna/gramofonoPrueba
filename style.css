@@ -155,6 +155,7 @@ body {
     body {
         height: auto;  /* Permitir que la altura se ajuste automáticamente */
         min-height: 100vh;
+        width: auto;
     }
 
     h1 {
