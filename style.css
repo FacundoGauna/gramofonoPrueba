@@ -2,26 +2,44 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Asegura que el contenido está centrado horizontalmente */
-    justify-content: center; /* Asegura que el contenido está centrado verticalmente */
+    align-items: center;
+    justify-content: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Georgia", serif; /* Fuente elegante y clásica */
     text-align: center;
     overflow: hidden;
 }
 
-/* Títulos con efecto de color */
-h1, h2 {
-    font-weight: bold;
-    background: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: black;
+/* Título principal */
+h1 {
+    font: oblique bold 135% "Georgia", serif;
+    color: #382916be; /* Burdeos */
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
-h1 { font-size: 2.5rem; margin-bottom: 10px; }
-h2 { font-size: 1.2rem; }
 
-/* Boton */
+/* Subtítulo */
+h2 {
+    font-weight: bold; /* En negrita */
+    font-size: 1.3rem;
+    color: #3c291d; /* Marrón */
+}
+
+h3 {
+    font-weight: bolt; /* En negrita */
+    font-size: 1.1rem;
+    color: #533a19c7; /* Marrón */
+}
+
+/* Texto de instrucción */
+p {
+    font-weight: normal; /* Sin negrita */
+    font-size: 1rem; /* Más pequeño */
+    color: rgb(118, 72, 40);
+    white-space: nowrap; /* En una sola línea */
+}
+
 button {
     position: absolute;
     top: 80px;
@@ -48,20 +66,27 @@ button:hover {
     height: 60vw;
     max-height: 300px;
     background: gray;
-    background-image: url("assets/vinilo-hardware.jpg");
+    background-image: url("assets/vinilo-hardware.png");
     background-size: cover;
-    border-radius: 0px;
     display: flex;
-    align-items: center;  /* Centra el contenido dentro del turntable */
-    justify-content: center;  /* Centra el contenido dentro del turntable */
-    margin: 0 auto; /* Asegura que el turntable esté centrado en la pantalla */
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }
+
+body {
+    background-image: url("assets/fondogram1.jpg"); /* Asegúrate de que la imagen esté en la ruta correcta */
+    background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
 
 /* Disco de vinilo */
 .disc {
     position: absolute;
-    width: 70%; /* Aumentado para que ocupe más espacio */
-    height: 70%; /* Aumentado para que ocupe más espacio */
+    width: 70%;
+    height: 70%;
     max-width: 250px;
     max-height: 250px;
     background: black;
@@ -69,7 +94,7 @@ button:hover {
     background-size: cover;
     border-radius: 50%;
     transition: transform 0.1s;
-    left: -10%; /* Centrado horizontalmente */
+    left: -10%;
 }
 
 /* Aguja del gramófono */
@@ -109,11 +134,28 @@ button:hover {
         left: 70%;
     }
 
-    .info-rect {
-        width: 80vw;
-        height: 106.67vw; /* 4:3 ratio */
+    h1 { font-size: 2.3rem; }
+    h2 { font-size: 1.2rem; }
+    h3 {font-size: 1.1rem;}
+    p { font-size: 1.1rem; } /* Aún más pequeño en móviles */
+}
+
+/* Estilo para dispositivos en modo horizontal */
+@media (orientation: landscape) {
+    body {
+        height: auto;  /* Permitir que la altura se ajuste automáticamente */
+        min-height: 100vh;
     }
 
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1rem; }
+    h1 {
+        font-size: 2rem;  /* Ajustar el tamaño del título en landscape */
+        margin-bottom: 20px;
+    }
+    p {
+        max-height: 80%
+    }
+
+    .turntable {
+        margin-top: 20px;  /* Agregar margen para que no se corte el contenido */
+    }
 }
