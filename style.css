@@ -15,10 +15,8 @@ body {
 h1 {
     font: oblique bold 135% "Georgia", serif;
     color: #382916be; /* Burdeos */
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 /* Subtítulo */
@@ -26,16 +24,12 @@ h2 {
     font-weight: bold; /* En negrita */
     font-size: 1.3rem;
     color: #3c291d; /* Marrón */
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 h3 {
     font-weight: bolt; /* En negrita */
     font-size: 1.1rem;
     color: #533a19c7; /* Marrón */
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 /* Texto de instrucción */
@@ -43,10 +37,7 @@ p {
     font-weight: normal; /* Sin negrita */
     font-size: 1rem; /* Más pequeño */
     color: rgb(118, 72, 40);
-    white-space: nowrap; /* En una sola línea */
-    margin-left: 10px;
-    margin-right: 10px;
-}
+} 
 
 @keyframes blinkColor {
     0% { background: #ff4444; }
@@ -153,22 +144,10 @@ body {
         left: 70%;
     }
 
-    h1 { font-size: 2.3rem; 
-        margin-left: 10px;
-        margin-right: 10px;
-       }
-    h2 { font-size: 1.2rem;
-        margin-left: 10px;
-        margin-right: 10px;
-       }
-    h3 {font-size: 1.1rem;
-        margin-left: 10px;
-        margin-right: 10px;
-       }
-    p { font-size: 1.1rem; 
-        left-margin: 10%; 
-        right-margin: 10%;
-      } /* Aún más pequeño en móviles */
+    h1 { font-size: 2.3rem; }
+    h2 { font-size: 1.2rem; }
+    h3 {font-size: 1.1rem;  }
+    p { font-size: 1.1rem;  }
 }
 
 /* Estilo para dispositivos en modo horizontal */
@@ -185,8 +164,6 @@ body {
     }
     p {
         max-width: 70%;
-        left-margin: 10%; 
-        right-margin: 10%;
     }
 
     .turntable {
